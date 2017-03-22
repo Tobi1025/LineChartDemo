@@ -1,6 +1,6 @@
-##LineChartView
+## LineChartView
 
-###xml文件中：
+### xml文件中：
     ``` java
 <com.example.qiaojingfei.linechartdemo.LineChartView
         android:layout_width="300dp"
@@ -8,7 +8,7 @@
         android:layout_centerInParent="true">
 </com.example.qiaojingfei.linechartdemo.LineChartView>
     ```
-###java代码中：
+### java代码中：
 1.onMeasure()中获取控件的宽高，并转化成px
 ``` java
     //获取自定义控件的宽高
