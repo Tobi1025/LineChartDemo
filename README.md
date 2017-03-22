@@ -1,7 +1,7 @@
 ## LineChartView
 
 ### xml文件中：
-    ``` java
+   ``` java
 <com.example.qiaojingfei.linechartdemo.LineChartView
         android:layout_width="300dp"
         android:layout_height="200dp"
