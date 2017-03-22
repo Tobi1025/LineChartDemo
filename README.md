@@ -1,4 +1,5 @@
 ##LineChartView
+
 ###xml文件中：
     ``` java
 <com.example.qiaojingfei.linechartdemo.LineChartView
@@ -23,10 +24,12 @@
         mHeight = DimenUtils.dpToPx(200, getResources());
     }
     ```
+    
 2.onDraw()中开始画坐标轴，然后描点连线。
 * 坐标轴上的刻度用canvas.drawText()画;
 * 坐标轴x和y轴用 canvas.drawLine()画；
 * 坐标轴顶端箭头通过path来实现。
+
 3.最后一步画点连线
 ``` java
  //画点
