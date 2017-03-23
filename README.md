@@ -24,7 +24,7 @@
     } else {
         mHeight = DimenUtils.dpToPx(200, getResources());
     }
-    ``` 
+ ``` 
     
 2.onDraw()中开始画坐标轴，然后描点连线。
 * 坐标轴上的刻度用canvas.drawText()画;
@@ -55,4 +55,4 @@
                 canvas.drawLine(pointXs.get(i - 1), pointYs.get(i - 1), pointXs.get(i), pointYs.get(i), pointPaint);
             }
         }
-        ```
+```
