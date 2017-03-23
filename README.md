@@ -53,5 +53,3 @@
                 canvas.drawLine(pointXs.get(i - 1), pointYs.get(i - 1), pointXs.get(i), pointYs.get(i), pointPaint);
             }
         }```
-    
-  
