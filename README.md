@@ -6,8 +6,8 @@
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true">
-</com.example.qiaojingfei.linechartdemo.LineChartView>
-```
+</com.example.qiaojingfei.linechartdemo.LineChartView>```
+
 ### java代码中：
 1.onMeasure()中获取控件的宽高，并转化成px
 ``` java
@@ -22,11 +22,9 @@
         mHeight = heightSize;
     } else {
         mHeight = DimenUtils.dpToPx(200, getResources());
-    }
-    ``` 
+    }``` 
     
 2.onDraw()中开始画坐标轴，然后描点连线。
-
 * 坐标轴上的刻度用canvas.drawText()画;
 * 坐标轴x和y轴用 canvas.drawLine()画；
 * 坐标轴顶端箭头通过path来实现。
@@ -54,7 +52,6 @@
             if (i > 0) {
                 canvas.drawLine(pointXs.get(i - 1), pointYs.get(i - 1), pointXs.get(i), pointYs.get(i), pointPaint);
             }
-        }
-        ```
+        }```
     
   
