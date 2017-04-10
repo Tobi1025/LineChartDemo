@@ -31,6 +31,12 @@ public class LineChartView extends View {
     private float mPointRadius = 10;//圆点的半径
     private List<Float> pointXs;//存放点的x坐标
     private List<Float> pointYs;//存放点的y坐标
+    private Paint paint;//画笔
+    private float textLength;
+    private float textHeight;
+    private float halfTextLength;
+    private float xSpace;//x轴刻度间隔
+    private float ySpace;//y轴刻度间隔
 
     public LineChartView(Context context) {
         this(context, null);
@@ -42,7 +48,22 @@ public class LineChartView extends View {
 
     public LineChartView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
+
+    }
+
+    private void init(Context context) {
         mContext = context;
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.RED);
+        int textSize = DimenUtils.sp2px(mContext, 16);
+        paint.setTextSize(textSize);
+        textLength = paint.measureText(yCoordText[1]);
+        textHeight = paint.getFontMetrics().descent - paint.getFontMetrics().ascent;
+        halfTextLength = textLength / 2;
+        Log.e("text==", "textLength=" + textLength + " textHeight=" + textHeight + " length/2=" + halfTextLength);
     }
 
     @Override
@@ -69,30 +90,21 @@ public class LineChartView extends View {
             pointMap.put(String.valueOf(i), yCoordText[(int) (Math.random() * 5)]);
         }
         Log.e("pointMap", pointMap.size() + "");
+        xSpace = (mWidth - paddingLeft) / xCoordText.length;
+        ySpace = (mHeight - paddingTop - paddingBottom) / yCoordText.length;
+        Log.e("space", "spaceX=" + xSpace + " spaceY=" + ySpace);
         setMeasuredDimension(mWidth, mHeight);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.RED);
-        int textSize = DimenUtils.sp2px(mContext, 16);
-        paint.setTextSize(textSize);
-        float textLength = paint.measureText(yCoordText[1]);
-        float textHeight = paint.getFontMetrics().descent - paint.getFontMetrics().ascent;
-        float halfTextLength = textLength / 2;
-        Log.e("text==", "textLength=" + textLength + " textHeight=" + textHeight + " length/2=" + halfTextLength);
-        float xSpace = (mWidth - paddingLeft) / xCoordText.length;//x轴刻度间隔
-        float ySpace = (mHeight - paddingTop - paddingBottom) / yCoordText.length;//y轴刻度间隔
-        Log.e("space", "spaceX=" + xSpace + " spaceY=" + ySpace);
         drawAxis(canvas, paint, textLength, textHeight, halfTextLength, xSpace, ySpace);
         drawPointAndLine(canvas, textLength, textHeight, xSpace, ySpace);
     }
 
     /**
      * 画点并将它们用线连接起来
+     *
      * @param canvas
      * @param textLength
      * @param textHeight
@@ -126,13 +138,14 @@ public class LineChartView extends View {
 
     /**
      * 画坐标轴
+     *
      * @param canvas
      * @param paint
-     * @param textLength        文字长度
-     * @param textHeight        文字高度
-     * @param halfTextLength    文字长度的一半
-     * @param xSpace            x轴刻度间隔
-     * @param ySpace            y轴刻度间隔
+     * @param textLength     文字长度
+     * @param textHeight     文字高度
+     * @param halfTextLength 文字长度的一半
+     * @param xSpace         x轴刻度间隔
+     * @param ySpace         y轴刻度间隔
      */
     private void drawAxis(Canvas canvas, Paint paint, float textLength, float textHeight, float halfTextLength, float xSpace, float ySpace) {
         //画Y轴上的刻度值
